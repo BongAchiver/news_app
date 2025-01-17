@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Новости{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+     {% if current_theme == "dark" %}
+          <link rel="stylesheet" href="{{ url_for('static', filename='dark_theme.css') }}">
+      {% endif %}
+</head>
+<body>
+   <div id="snowflakes"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Главная</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+               {% if session.user_id %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout_user') }}">Выйти</a>
+                     </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="{{ url_for('user_settings') }}">Профиль</a>
+                    </li>
+               {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login_user') }}">Войти</a>
+                    </li>
+                  <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register') }}">Регистрация</a>
+                    </li>
+               {% endif %}
+                 <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#accountModal">
+                       Настройки
+                    </a>
+                  </li>
+             </ul>
+        </div>
+    </nav>
+    <div class="container-fluid content-wrapper">
+        <div class="content">
+             {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="accountModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="accountModalLabel">Настройки аккаунта</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                       {% if session.is_editor %}
+                            <a class="list-group-item list-group-item-action" href="{{ url_for('editor') }}">Редактор</a>
+                           <a class="list-group-item list-group-item-action" href="{{ url_for('logout') }}">Выйти (Редактор)</a>
+                      {% else %}
+                           <a class="list-group-item list-group-item-action" href="{{ url_for('login') }}">Войти (Редактор)</a>
+                      {% endif %}
+                       {% if session.is_admin %}
+                           <a class="list-group-item list-group-item-action" href="{{ url_for('admin_panel') }}">Админ панель</a>
+                          <a class="list-group-item list-group-item-action" href="{{ url_for('admin_logout') }}">Выйти (Админ)</a>
+                        {% else %}
+                             <a class="list-group-item list-group-item-action" href="{{ url_for('admin_login') }}">Войти (Админ)</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="text-center mt-4 py-3 bg-dark text-white fixed-bottom">
+        <p>© 2024 Новостной Сайт</p>
+    </footer>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <script>
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            for(let i = 0; i < 100; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.top = Math.random() * 100 + 'vh';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.animationDuration = Math.random() * 10 + 5 + 's';
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+         createSnowflakes();
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+    <h1>Свежие новости</h1>
+    <div class="articles-list">
+        {% for article in articles %}
+            <div class="article-card">
+                 {% if article.image_path %}
+                    <img src="{{ url_for('static', filename=article.image_path) }}" alt="Article Image" style="max-width: 100%; height: auto;">
+                 {% endif %}
+                <h2><a href="{{ url_for('article', article_id=article.id) }}">{{ article.title }}</a></h2>
+                 {% if article.tags %}
+                    <p class="tags">Теги:
+                    {% for tag in article.tags.split(',') %}
+                        <span class="badge badge-secondary">{{ tag.strip() }}</span>
+                    {% endfor %}
+                    </p>
+                    {% endif %}
+                <p class="date">Опубликовано: {{ article.created_at.split("T")[0] }}</p>
+                <div class="content-preview">{{ article.content[:200] }}...</div>
+                 <div class="article-footer">
+                    <span class="likes-count">{{ likes_counts[article.id] }}</span>
+                       {% if session.user_id %}
+                         <form method="post" action="{{ url_for('like_article', article_id=article.id) }}" style="display: inline;">
+                            <button type="submit" class="like-btn {% if liked_articles[article.id] %}liked{% endif %}">
+                               <span class="heart-icon"></span>
+                            </button>
+                        </form>
+                    {% else %}
+                        <span class="like-btn"><span class="heart-icon"></span></span>
+                     {% endif %}
+                </div>
+             </div>
+        {% endfor %}
+    </div>
+{% endblock %}

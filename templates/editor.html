@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Редактор{% endblock %}
+{% block content %}
+    <h1>{% if article %}Редактировать статью{% else %}Новая статья{% endif %}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% if article %}
+           <input type="hidden" name="id" value="{{ article.id }}">
+        {% endif %}
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title" value="{% if article %}{{ article.title }}{% endif %}" required>
+
+        <label for="content">Содержание:</label>
+        <textarea id="content" name="content" rows="10" required>{% if article %}{{ article.content }}{% endif %}</textarea>
+        
+         <label for="tags">Теги (через запятую):</label>
+        <input type="text" id="tags" name="tags" value="{% if article %}{{ article.tags }}{% endif %}">
+        <label for="image">Картинка (png/jpg/jpeg):</label>
+        <input type="file" id="image" name="image" accept="image/*">
+        <button type="submit">{% if article %}Сохранить изменения{% else %}Опубликовать{% endif %}</button>
+    </form>
+{% endblock %}

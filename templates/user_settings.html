@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Настройки профиля{% endblock %}
+{% block content %}
+    <h1>Настройки профиля</h1>
+    {% if error %}
+        <p class="alert alert-danger">{{ error }}</p>
+    {% endif %}
+    {% if message %}
+      <p class="alert alert-success">{{ message }}</p>
+    {% endif %}
+    <div class="card">
+    <div class="card-body">
+    <form method="post">
+      <h2>Изменить никнейм</h2>
+        <div class="form-group">
+           <label for="username">Новый никнейм:</label>
+           <input type="text" id="username" name="username" class="form-control" value="{{ user.username }}" required>
+         </div>
+           <button type="submit" class="btn btn-primary">Сохранить никнейм</button>
+    </form>
+  </div>
+   </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <form method="post">
+       <h2>Изменить пароль</h2>
+           <div class="form-group">
+                <label for="password">Новый пароль:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+           </div>
+            <button type="submit" class="btn btn-primary">Сохранить пароль</button>
+       </form>
+    </div>
+  </div>
+    <div class="card mt-3">
+     <div class="card-body">
+        <form method="post">
+         <h2>Изменить тему</h2>
+            <div class="form-group">
+                <label for="theme">Выбрать тему:</label>
+                 <select name="theme" id="theme" class="form-control">
+                    <option value="light" {% if current_theme == 'light' %}selected{% endif %}>Светлая</option>
+                     <option value="dark" {% if current_theme == 'dark' %}selected{% endif %}>Темная</option>
+                </select>
+            </div>
+           <button type="submit" class="btn btn-primary">Сохранить тему</button>
+       </form>
+    </div>
+    </div>
+{% endblock %}

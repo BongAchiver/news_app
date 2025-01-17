@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+    <div class="article-page">
+      <h1>{{ article.title }}</h1>
+      <p class="date">Опубликовано: {{ article.created_at.split("T")[0] }}</p>
+      <p class="updated-date">Обновлено: {{ article.updated_at.split("T")[0] }}</p>
+        {% if article.image_path %}
+          <img src="{{ url_for('static', filename=article.image_path) }}" alt="Article Image" style="max-width: 100%; height: auto;">
+        {% endif %}
+      <div class="article-content">{{ article.content }}</div>
+        <div class="article-footer">
+            <span class="likes-count">{{  likes_count }}</span>
+            {% if session.user_id %}
+               <form method="post" action="{{ url_for('like_article', article_id=article.id) }}" style="display: inline;">
+                 <button type="submit" class="like-btn {% if user_liked %}liked{% endif %}">
+                   <span class="heart-icon"></span>
+                 </button>
+              </form>
+           {% else %}
+              <span class="like-btn"><span class="heart-icon"></span></span>
+            {% endif %}
+       </div>
+        <a href="{{ url_for('edit_article', article_id=article.id) }}">Редактировать</a>
+    </div>
+{% endblock %}

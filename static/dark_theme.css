@@ -1,0 +1,83 @@
+body {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+nav.navbar-dark {
+    background-color: #212529 !important;
+}
+
+.content {
+    background: #495057;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    color:#f8f9fa;
+}
+
+.card{
+    background-color: #495057;
+    color:#f8f9fa;
+}
+
+.card-header, .card-body, .card-footer{
+   background-color: #495057;
+    color:#f8f9fa;
+}
+
+.card-header{
+    border-bottom: 1px solid #565656;
+}
+
+.modal-content {
+    background-color: #343a40;
+    color:#f8f9fa;
+}
+.modal-header {
+    background-color: #212529;
+    border-bottom: 1px solid #565656;
+}
+
+footer {
+  background-color: #212529;
+}
+
+.article-card {
+  background: #495057;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    color: #f8f9fa;
+}
+
+.article-card .content-preview, .article-page .article-content{
+  color:#f8f9fa;
+}
+
+.article-page{
+  background: #495057;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  color: #f8f9fa;
+}
+
+h1 {
+  color: #f8f9fa;
+    border-bottom: 1px solid #565656;
+}
+
+.article-footer {
+   background-color: #565656;
+   color: #f8f9fa;
+}
+
+.likes-count {
+    color: #f8f9fa;
+}
+
+.article-card .date, .article-page .date, .article-page .updated-date {
+  color: #ccc;
+}
+
+.like-btn.liked .heart-icon::before{
+    background-color: #dc3545;
+}
+
+#loading-overlay {
+  background-color: #212529;
+}

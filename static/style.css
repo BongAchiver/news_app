@@ -1,0 +1,258 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    background-image: none;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+
+/* Анимация снежинок */
+.snowflake {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear infinite;
+    filter: blur(0.5px);
+    transition: opacity 0.5s ease-in;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+nav {
+    z-index: 10;
+    position: relative;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 1200px;
+    position: relative;
+    padding: 0 20px;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin-right: 0;
+}
+
+h1 {
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    width: 100%;
+}
+
+/* Стили для списка статей */
+.articles-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.article-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+}
+
+.article-card h2 {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.article-card h2 a {
+    text-decoration: none;
+    color: #333;
+}
+
+.article-card .date {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.content-preview {
+    font-size: 0.95em;
+    line-height: 1.4;
+    color: #555;
+    word-wrap: break-word;
+}
+
+/* Стиль для страницы статьи */
+.article-page {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.article-page h1 {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.article-page .date, .article-page .updated-date {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.article-page .article-content {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+    word-wrap: break-word;
+}
+
+/* Стили для редактора */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input[type="text"],
+form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1em;
+    resize: vertical;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #555;
+}
+
+/* Стили для модального окна */
+.modal-content {
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border: 0;
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-title {
+    font-weight: bold;
+  }
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/*Добавлен стиль для тегов*/
+.tags {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.tags .badge {
+    margin-right: 5px;
+}
+
+.article-footer {
+    background-color: #f8f9fa;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: fit-content;
+    float: right;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ccc;
+    margin-left: 5px;
+    outline: none;
+}
+
+
+.like-btn.liked .heart-icon::before {
+    background-color: #dc3545;
+}
+
+.likes-count {
+    margin-right: 5px;
+    font-size: 1em;
+    color: #555;
+}
+/* Стили для иконки сердечка */
+.heart-icon::before {
+    content: "";
+    display: inline-block;
+     width: 20px;
+    height: 20px;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='currentColor' d='M462.3 62.6c-4.7-13.8-16.6-24.8-29.9-27.7C392.3 31.5 382 32.9 368.9 41.3L256 187.8 143.1 41.3C129.9 32.9 119.7 31.5 106.8 34.9c-13.3 2.9-25.2 13.9-29.9 27.7C49.5 102.1 48 114.5 48 146.1v139.9c0 48.5 23.3 72.1 71.3 72.1H180.8c21.3 0 32.5 11.5 38.5 31.5l21.3 71c4.6 15.2 16.8 26 30.4 26s25.8-10.8 30.4-26l21.3-71c6-20 17.1-31.5 38.5-31.5h61.4c48 0 71.3-23.5 71.3-72.1V146.1c0-31.6-1.5-44-21.7-83.5zM396.6 203.5h-36.1c-13.8 0-25-11.2-25-25s11.2-25 25-25h36.1c13.8 0 25 11.2 25 25s-11.1 25-25 25zM115.8 203.5H79.7c-13.8 0-25-11.2-25-25s11.2-25 25-25h36.1c13.8 0 25 11.2 25 25s-11.1 25-25 25z' /%3E%3C/svg%3E");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    background-color: #ccc;
+    display: inline-block;
+}

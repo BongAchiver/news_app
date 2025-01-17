@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Панель администратора{% endblock %}
+{% block content %}
+    <h1>Панель администратора</h1>
+     <form method="post" enctype="multipart/form-data">
+            <h2>Настройки баннеров</h2>
+            <label for="left_banner">Левый баннер (png/jpg/jpeg):</label>
+            <input type="file" id="left_banner" name="left_banner" accept="image/*">
+
+            <label for="right_banner">Правый баннер (png/jpg/jpeg):</label>
+            <input type="file" id="right_banner" name="right_banner" accept="image/*">
+            
+            <button type="submit">Сохранить</button>
+    </form>
+    <h2>Список статей</h2>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <a href="{{ url_for('article', article_id=article.id) }}">{{ article.title }}</a>
+                <form method="post" action="{{ url_for('delete_article_from_admin_panel', article_id=article.id) }}" style="display: inline;">
+                 <button type="submit">Удалить</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+     <a href="{{ url_for('admin_logout') }}">Выйти</a>
+{% endblock %}
